@@ -4,31 +4,33 @@ on: release
 name: Duplicate Release With Asset to public_Repo
 
 jobs:
-  Checkout:
-    - name: Checkout repo
-      uses: actions/checkout@v3
-      with:
-        path: 'TestReleaseGitAction'
-        ref: 'main'
-        repository: 'ablack3/TestReleaseGitAction'
-        token: ${{ secrets.PRIVATE_TOKEN }}
-        persist-credentials: true
-
-  Push:
-    - name: Push private to public
-      shell: bash
-      working-directory: 'TestReleaseGitAction'
-      run: |
-        git config --global user.name "release bot"
-        git remote add public git@github.com:ablack3/TestReleaseGitActionPublic
-        git push public main
-
-  Release:
+  Mirror:
     runs-on: ubuntu-latest
     steps:
-      - uses: Hs1r1us/Release-AIO@v2.0.0
+      - name: Checkout repo
+        uses: actions/checkout@v3
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
+        with:
+          path: 'TestReleaseGitAction'
+          ref: 'main'
+          repository: 'ablack3/TestReleaseGitAction'
+          token: ${{ secrets.PRIVATE_TOKEN }}
+          persist-credentials: true
+
+      - name: Push to public mirror
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
+        shell: bash
+        working-directory: 'TestReleaseGitAction'
+        run: |
+          git config --global user.name "release bot"
+          git remote add public git@github.com:ablack3/TestReleaseGitActionPublic
+          git push public main
+
+      - uses: Hs1r1us/Release-AIO@v2.0.0
+        env:
+            GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
         with:
           tag_name: 'inherit' # Must use 'inherit' to get the latest release
           body: 'hello world' # Will be added in the new release
