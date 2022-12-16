@@ -4,6 +4,25 @@ on: release
 name: Duplicate Release With Asset to public_Repo
 
 jobs:
+  Checkout:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        path: 'TestReleaseGitAction'
+        ref: 'main'
+        repository: 'ablack3/TestReleaseGitAction'
+        token: ${{ secrets.PRIVATE_TOKEN }}
+        persist-credentials: true
+
+  Push:
+    - name: Push private to public
+      shell: bash
+      working-directory: 'TestReleaseGitAction'
+      run: |
+        git config --global user.name "release bot"
+        git remote add public git@github.com:ablack3/TestReleaseGitActionPublic
+        git push public main
+
   Release:
     runs-on: ubuntu-latest
     steps:
