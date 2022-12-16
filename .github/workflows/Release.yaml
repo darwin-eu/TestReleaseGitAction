@@ -26,7 +26,8 @@ jobs:
         # git remote add public git@github.com:ablack3/TestReleaseGitActionPublic
         run: |
           git config --global user.name "release bot"
-          eval "git push https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitActionPublic.git"
+          eval "git pull https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitActionPublic.git main"
+          eval "git push https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitActionPublic.git main"
 
       - uses: Hs1r1us/Release-AIO@v2.0.0
         env:
