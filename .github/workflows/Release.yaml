@@ -9,8 +9,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
         with:
           path: 'TestReleaseGitAction'
           ref: 'main'
@@ -24,11 +22,11 @@ jobs:
         shell: bash
         working-directory: 'TestReleaseGitAction'
         # git remote add public git@github.com:ablack3/TestReleaseGitActionPublic
+        # eval 'git pull https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitActionPublic.git main'
         run: |
           git config --global user.name "release bot"
           git config --global pull.ff only
-          eval "git pull https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitActionPublic.git main"
-          eval "git push https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitActionPublic.git main"
+          eval 'git push https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitActionPublic.git main'
 
       - uses: Hs1r1us/Release-AIO@v2.0.0
         env:
