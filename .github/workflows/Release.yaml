@@ -23,10 +23,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
         shell: bash
         working-directory: 'TestReleaseGitAction'
+        # git remote add public git@github.com:ablack3/TestReleaseGitActionPublic
         run: |
           git config --global user.name "release bot"
-          git remote add public git@github.com:ablack3/TestReleaseGitActionPublic
-          git push public main
+          eval "git push https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitActionPublic.git"
 
       - uses: Hs1r1us/Release-AIO@v2.0.0
         env:
