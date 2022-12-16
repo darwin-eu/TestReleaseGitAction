@@ -1,0 +1,22 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+on:
+  release:
+    branches: [main, master]
+
+name: Mirror-Release
+
+jobs:
+  Release:
+    runs-on: {os: ubuntu-latest}
+    name: Duplicate Release With Asset to public_Repo
+    id: Release-AIO
+    uses: Hs1r1us/Release-AIO@v2.0.0
+    env:
+      GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }} # You need a new token to access the target Repository
+    with:
+      tag_name: 'inherit' # Must use 'inherit' to get the latest release
+      body: 'hello world' # Will be added in the new release
+      repo: 'Hs1r1us/public_Repo' # The format is like owner/repo
+      asset_files: './asset_file' # Will be added in the new release
+
