@@ -4,19 +4,18 @@ on:
   release:
     branches: [main, master]
 
-name: Mirror-Release
+name: Duplicate Release With Asset to public_Repo
 
 jobs:
   Release:
-    runs-on: {os: ubuntu-latest}
-    name: Duplicate Release With Asset to public_Repo
-    id: Release-AIO
-    uses: Hs1r1us/Release-AIO@v2.0.0
-    env:
-      GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }} # You need a new token to access the target Repository
-    with:
-      tag_name: 'inherit' # Must use 'inherit' to get the latest release
-      body: 'hello world' # Will be added in the new release
-      repo: 'ablack3/TestReleaseGitActionPublic' # The format is like owner/repo
-      asset_files: './asset_file' # Will be added in the new release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Hs1r1us/Release-AIO@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
+        with:
+          tag_name: 'inherit' # Must use 'inherit' to get the latest release
+          body: 'hello world' # Will be added in the new release
+          repo: 'ablack3/TestReleaseGitActionPublic' # The format is like owner/repo
+          asset_files: './asset_file' # Will be added in the new release
 
