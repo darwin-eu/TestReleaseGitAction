@@ -1,3 +1,3 @@
 # readme
 
-Test automated release
+Test automated release process.
