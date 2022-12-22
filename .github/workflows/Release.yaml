@@ -1,4 +1,6 @@
-on: release
+on:
+  release:
+    types: [published]
 name: Duplicate Release With Asset to Public Repo
 
 jobs:
