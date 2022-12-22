@@ -1,7 +1,5 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
-on: push
-name: Duplicate Release With Asset to public_Repo
+on: release
+name: Duplicate Release With Asset to Public Repo
 
 jobs:
   Mirror:
@@ -17,25 +15,23 @@ jobs:
           persist-credentials: true
 
       - name: Push to public mirror
+        id: push
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
         shell: bash
         working-directory: 'TestReleaseGitAction'
-        # git remote add public git@github.com:ablack3/TestReleaseGitActionPublic
-        # eval 'git pull https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitActionPublic.git main'
         run: |
           git config --global user.name "release bot"
-          git config --global pull.ff only
           eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/TestReleaseGitAction.git main'
           git push origin main
 
-#
-      # - uses: Hs1r1us/Release-AIO@v2.0.0
-      #   env:
-      #       GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
-      #   with:
-      #     tag_name: 'inherit' # Must use 'inherit' to get the latest release
-      #     body: 'hello world' # Will be added in the new release
-      #     repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
-      #     # asset_files: './asset_file' # Will be added in the new release
+      - uses: Hs1r1us/Release-AIO@v2.0.0
+        if: steps.push.outcome == 'success'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
+        with:
+          tag_name: 'inherit' # Must use 'inherit' to get the latest release
+          body: 'hello world' # Will be added in the new release
+          repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
+          # asset_files: './asset_file' # Will be added in the new release
 
