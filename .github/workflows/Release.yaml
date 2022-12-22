@@ -26,7 +26,7 @@ jobs:
         run: |
           git config --global user.name "release bot"
           git config --global pull.ff only
-          eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/TestReleaseGitActionPublic.git main'
+          eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/TestReleaseGitAction.git main'
           git push origin main
 
 #
