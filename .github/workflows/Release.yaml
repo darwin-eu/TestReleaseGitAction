@@ -12,7 +12,7 @@ jobs:
         with:
           path: 'TestReleaseGitAction'
           ref: 'main'
-          repository: 'ablack3/TestReleaseGitAction'
+          repository: 'darwin-eu/TestReleaseGitAction'
           token: ${{ secrets.PRIVATE_TOKEN }}
           persist-credentials: true
 
@@ -26,14 +26,16 @@ jobs:
         run: |
           git config --global user.name "release bot"
           git config --global pull.ff only
-          eval 'git push https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitActionPublic.git main'
+          eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/TestReleaseGitActionPublic.git main'
+          git push origin main
 
-      - uses: Hs1r1us/Release-AIO@v2.0.0
-        env:
-            GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
-        with:
-          tag_name: 'inherit' # Must use 'inherit' to get the latest release
-          body: 'hello world' # Will be added in the new release
-          repo: 'ablack3/TestReleaseGitActionPublic' # The format is like owner/repo
-          # asset_files: './asset_file' # Will be added in the new release
+#
+      # - uses: Hs1r1us/Release-AIO@v2.0.0
+      #   env:
+      #       GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
+      #   with:
+      #     tag_name: 'inherit' # Must use 'inherit' to get the latest release
+      #     body: 'hello world' # Will be added in the new release
+      #     repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
+      #     # asset_files: './asset_file' # Will be added in the new release
 
