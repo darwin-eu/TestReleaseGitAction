@@ -5,7 +5,7 @@ name: Duplicate Release With Asset to Public Repo
 
 jobs:
   Mirror:
-    if: ${{ github.repository }} == 'ablack3/TestReleaseGitAction'
+    if: github.repository == 'ablack3/TestReleaseGitAction'
     runs-on: ubuntu-latest
     steps:
       - name: Print
