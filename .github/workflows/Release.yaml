@@ -5,8 +5,12 @@ name: Duplicate Release With Asset to Public Repo
 
 jobs:
   Mirror:
+    if: ${{ github.repository }} == ''
     runs-on: ubuntu-latest
     steps:
+      - name: Print
+        run: env | sort
+
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
