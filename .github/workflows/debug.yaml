@@ -1,11 +1,11 @@
-name: Print environment variables
-
-on: push
-
-jobs:
-  debug:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Print
-        run: env | sort
+# name: Print environment variables
+#
+# on: push
+#
+# jobs:
+#   debug:
+#     runs-on: ubuntu-latest
+#
+#     steps:
+#       - name: Print
+#         run: env | sort
