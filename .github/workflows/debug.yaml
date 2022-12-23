@@ -1,7 +1,6 @@
 name: Print environment variables
 
-on:
-  workflow_dispatch:
+on: push
 
 jobs:
   debug:
