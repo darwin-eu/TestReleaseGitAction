@@ -36,7 +36,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
         with:
-          #tag_name: 'inherit' # Must use 'inherit' to get the latest release
+          tag_name: 'blah' # Must use 'inherit' to get the latest release
           body: 'test message' # Will be added in the new release
           # repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
           repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
