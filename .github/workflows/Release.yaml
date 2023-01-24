@@ -49,7 +49,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
         with:
           tag_name: ${{ steps.previoustag.outputs.tag }} # Must use 'inherit' to get the latest release
-          body: inherit # Will be added in the new release
+          body: "${{ github.event.release.body }}" # Will be added in the new release
           # repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
           repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
           #asset_files: './asset_file' # Will be added in the new release
