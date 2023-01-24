@@ -38,6 +38,9 @@ jobs:
         id: previoustag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
 
+      - name Get Release Info
+        run: echo "Name: ${{ github.event.release.name }} Description: ${{ github.event.release.body }}"
+
       - uses: Hs1r1us/Release-AIO@v2.0.0
         if: steps.push.outcome == 'success'
         env:
