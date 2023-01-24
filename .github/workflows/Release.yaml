@@ -40,5 +40,5 @@ jobs:
           body: 'test message' # Will be added in the new release
           # repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
           repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
-          asset_files: './asset_file' # Will be added in the new release
+          #asset_files: './asset_file' # Will be added in the new release
 
