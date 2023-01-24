@@ -38,7 +38,7 @@ jobs:
         id: previoustag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
 
-      - name Get Release Info
+      - name: Get Release Info
         run: echo "Name: ${{ github.event.release.name }} Description: ${{ github.event.release.body }}"
 
       - uses: Hs1r1us/Release-AIO@v2.0.0
@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
         with:
           tag_name: ${{ steps.previoustag.outputs.tag }} # Must use 'inherit' to get the latest release
-          body: 'test message' # Will be added in the new release
+          body: inherit # Will be added in the new release
           # repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
           repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
           #asset_files: './asset_file' # Will be added in the new release
