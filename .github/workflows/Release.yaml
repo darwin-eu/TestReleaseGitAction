@@ -5,7 +5,7 @@ name: Duplicate Release With Asset to Public Repo
 
 jobs:
   Mirror:
-    if: github.repository == 'ablack3/TestReleaseGitAction'
+    if: github.repository == 'darwin-eu/TestReleaseGitAction'
     runs-on: ubuntu-latest
     steps:
       - name: Print
@@ -14,9 +14,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          path: 'TestReleaseGitActionPublic'
+          path: 'TestReleaseGitAction'
           ref: 'main'
-          repository: 'ablack3/TestReleaseGitActionPublic'
+          repository: 'darwin-eu/TestReleaseGitAction'
           token: ${{ secrets.PRIVATE_TOKEN }}
           persist-credentials: true
 
@@ -25,10 +25,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
         shell: bash
-        working-directory: 'TestReleaseGitActionPublic'
+        working-directory: 'TestReleaseGitAction'
         run: |
           git config --global user.name "release bot"
-          eval 'git pull https://$GITHUB_TOKEN@github.com/ablack3/TestReleaseGitAction.git main'
+          eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/TestReleaseGitAction.git main'
           git push origin main
 
       - uses: Hs1r1us/Release-AIO@v2.0.0
@@ -37,8 +37,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
         with:
           tag_name: 'inherit' # Must use 'inherit' to get the latest release
-          body: 'inherit' # Will be added in the new release
+          body: 'test message' # Will be added in the new release
           # repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
-          repo: 'ablack3/TestReleaseGitActionPublic' # The format is like owner/repo
+          repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
           asset_files: './asset_file' # Will be added in the new release
 
