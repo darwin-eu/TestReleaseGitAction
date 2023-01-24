@@ -31,12 +31,19 @@ jobs:
           eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/TestReleaseGitAction.git main'
           git push origin main
 
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required due to the way Git works, without it this action won't be able to find any or the correct tags
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+
       - uses: Hs1r1us/Release-AIO@v2.0.0
         if: steps.push.outcome == 'success'
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
         with:
-          tag_name: 'blah' # Must use 'inherit' to get the latest release
+          tag_name: ${{ steps.previoustag.outputs.tag }} # Must use 'inherit' to get the latest release
           body: 'test message' # Will be added in the new release
           # repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
           repo: 'darwin-eu/TestReleaseGitAction' # The format is like owner/repo
