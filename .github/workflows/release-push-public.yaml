@@ -62,7 +62,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
       shell: bash
-      working-directory: 'Target'
       run: |
         git config --global user.name ${{ env.GITHUB_ACTOR}}
         eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/${{ env.PACKAGE_NAME }}.git main'
