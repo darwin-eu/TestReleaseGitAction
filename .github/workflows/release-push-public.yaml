@@ -80,7 +80,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
-        repository: darwin-eu/${{ env.PACKAGE_NAME }}
+        owner: darwin-eu
+        repos: ${{ env.PACKAGE_NAME }}
         token:  ${{ secrets.RELEASE_TOKEN }}
         tag_name: v${{ env.VERSION }}
         release_name: Release ${{ env.VERSION }}
