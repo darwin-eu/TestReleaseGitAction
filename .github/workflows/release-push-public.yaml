@@ -1,8 +1,6 @@
+name: Dispatch Release Push Public
 on:
-  release:
-    types: [published]
-
-name: Release Push Public
+  workflow_dispatch:
 
 jobs:
   extract_package_name:
