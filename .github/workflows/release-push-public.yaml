@@ -81,9 +81,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
         repository: darwin-eu/${{ env.PACKAGE_NAME }}
+        token:  ${{ secrets.RELEASE_TOKEN }}
         tag_name: v${{ env.VERSION }}
         release_name: Release ${{ env.VERSION }}
         body: Release of version ${{ env.VERSION }}. For changelog see NEWS.md.
         draft: false
         prerelease: false
-      token: ${{ secrets.REPO_TOKEN }}
+
