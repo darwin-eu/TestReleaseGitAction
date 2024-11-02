@@ -39,12 +39,16 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: Push to Another Repository with Squash
+    - name: Push to public mirror
+      id: push
       env:
-        REPO_URL: https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/darwin-eu/${{ env.PACKAGE_NAME }}.git
+        GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
+      shell: bash
+      working-directory: 'TestReleaseGitAction'
       run: |
-        git remote add target $REPO_URL
-        git push target main:main
+        git config --global user.name "release bot"
+        eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/TestReleaseGitAction.git main'
+        git push origin main
 
     - name: Create Release in Target Repository
       id: create_release_target
