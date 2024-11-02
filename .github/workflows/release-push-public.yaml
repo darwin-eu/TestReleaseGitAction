@@ -86,3 +86,4 @@ jobs:
         body: Release of version ${{ env.VERSION }}. For changelog see NEWS.md.
         draft: false
         prerelease: false
+      token: ${{ secrets.REPO_TOKEN }}
