@@ -1,7 +1,7 @@
+name: Release Push Public
 on:
   release:
     types: [published]
-name: Release Push Public
 
 jobs:
   extract_package_name:
