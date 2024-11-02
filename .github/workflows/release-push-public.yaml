@@ -83,6 +83,6 @@ jobs:
         repository: darwin-eu/${{ env.PACKAGE_NAME }}
         tag_name: v${{ env.VERSION }}
         release_name: Release ${{ env.VERSION }}
-        body: Release of version ${{ env.VERSION }}
+        body: Release of version ${{ env.VERSION }}. For changelog see NEWS.md.
         draft: false
         prerelease: false
