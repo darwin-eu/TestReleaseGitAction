@@ -60,7 +60,7 @@ jobs:
         path: 'Target'
         ref: 'main'
         repository: 'darwin-eu/${{ env.PACKAGE_NAME }}'
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PRIVATE_TOKEN }}
         persist-credentials: true
 
     - name: Push to public mirror
@@ -75,10 +75,10 @@ jobs:
         git push origin main
 
     - name: Create Release in Target Repository
-      id: create_release_targetP
+      id: create_release_target
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
       with:
         owner: darwin-eu
         repo: ${{ env.PACKAGE_NAME }}
@@ -87,4 +87,3 @@ jobs:
         body: Release of version ${{ env.VERSION }}. For changelog see NEWS.md.
         draft: false
         prerelease: false
-
