@@ -63,12 +63,10 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         persist-credentials: true
 
-#    git config --global user.name PRijnbeek
-
     - name: Push to public mirror
       id: push
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
       shell: bash
       working-directory: 'Target'
       run: |
@@ -76,10 +74,10 @@ jobs:
         git push origin main
 
     - name: Create Release in Target Repository
-      id: create_release_target
+      id: create_release_targetP
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
       with:
         owner: darwin-eu
         repo: ${{ env.PACKAGE_NAME }}
