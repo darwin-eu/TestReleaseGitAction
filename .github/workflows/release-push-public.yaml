@@ -62,8 +62,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
       shell: bash
+      working-directory: .
       run: |
-        git config --global user.name ${{ env.GITHUB_ACTOR}}
+        git config --global user.name PRijnbeek
         eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/${{ env.PACKAGE_NAME }}.git main'
         git push origin main
 
