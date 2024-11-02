@@ -60,7 +60,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
-        repository: darwin-eu/${{ env.PACKAGE_NAME }
+        repository: darwin-eu/${{ env.PACKAGE_NAME }}
         tag_name: v${{ env.VERSION }}
         release_name: Release ${{ env.VERSION }}
         body: Release of version ${{ env.VERSION }}
