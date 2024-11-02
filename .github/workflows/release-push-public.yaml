@@ -63,6 +63,8 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         persist-credentials: true
 
+#    git config --global user.name PRijnbeek
+
     - name: Push to public mirror
       id: push
       env:
@@ -70,7 +72,6 @@ jobs:
       shell: bash
       working-directory: 'Target'
       run: |
-        git config --global user.name PRijnbeek
         eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/${{ env.PACKAGE_NAME }}.git main'
         git push origin main
 
