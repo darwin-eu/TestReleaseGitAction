@@ -48,11 +48,12 @@ jobs:
       env:
         REPO_URL: https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/darwin-eu/${{ env.PACKAGE_NAME }}.git
       run: |
-        git config --global user.name "release bot"
+        git config --global user.name "Darwin EU"
+        git config --global user.email "enquiries@darwin-eu.org"
         git remote add target $REPO_URL
         git fetch origin
         git merge --squash origin/main
-        git commit -m "Squash commit for release ${{ env.VERSION }}"
+        git commit -m "Squash commit for release ${{ env.VERSION }} from darwin-eu-dev repository"
         git push target main:main
 
     - name: Create Release in Target Repository
