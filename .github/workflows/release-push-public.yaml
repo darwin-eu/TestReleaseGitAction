@@ -58,7 +58,7 @@ jobs:
       shell: bash
       working-directory: ${{ env.PACKAGE_NAME }}
       run: |
-        git config --global user.name "release bot"
+        git config --global user.name ${{ env.PACKAGE_NAME }}
         eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/${{ env.PACKAGE_NAME }}.git main'
         git push origin main
 
