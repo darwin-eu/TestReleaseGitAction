@@ -66,7 +66,7 @@ jobs:
     - name: Push to public mirror
       id: push
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
       shell: bash
       working-directory: 'Target'
       run: |
