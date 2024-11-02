@@ -1,0 +1,68 @@
+name: Release Push Public
+on:
+  release:
+    types: [published]
+
+jobs:
+  extract_package_name:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Get Package Name from DESCRIPTION
+      id: get_package_name
+      run: |
+        PACKAGE_NAME=$(grep -E '^Package:' DESCRIPTION | awk '{print $2}')
+        echo "PACKAGE_NAME=$PACKAGE_NAME" >> $GITHUB_ENV
+
+    - name: Use Package Name
+      run: echo "The package name is ${{ env.PACKAGE_NAME }}"
+  create_release_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Get Version from DESCRIPTION
+      id: get_version
+      run: |
+        VERSION=$(grep -E '^Version:' DESCRIPTION | awk '{print $2}')
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+    - name: Create Release in Source Repository
+      id: create_release_source
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ env.VERSION }}
+        release_name: Release ${{ env.VERSION }}
+        body: Release of version ${{ env.VERSION }}. For changelog see NEWS.md.
+        draft: false
+        prerelease: false
+
+    - name: Push to Another Repository with Squash
+      env:
+        REPO_URL: https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/darwin-eu/${{ env.PACKAGE_NAME }}.git
+      run: |
+        git remote add target $REPO_URL
+        git fetch origin
+        git merge --squash origin/main
+        git commit -m "Squash commit for release ${{ env.VERSION }}"
+        git push target main:main
+
+    - name: Create Release in Target Repository
+      id: create_release_target
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+      with:
+        repository: darwin-eu/${{ env.PACKAGE_NAME }
+        tag_name: v${{ env.VERSION }}
+        release_name: Release ${{ env.VERSION }}
+        body: Release of version ${{ env.VERSION }}
+        draft: false
+        prerelease: false
