@@ -43,8 +43,8 @@ jobs:
       env:
         REPO_URL: https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/darwin-eu/${{ env.PACKAGE_NAME }}.git
       run: |
-        git config --global user.name "Darwin EU"
-        git config --global user.email "enquiries@darwin-eu.org"
+ #       git config --global user.name "Darwin EU"
+ #       git config --global user.email "enquiries@darwin-eu.org"
         git remote add target $REPO_URL
         git push target main:main
 
