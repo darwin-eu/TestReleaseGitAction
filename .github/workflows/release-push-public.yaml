@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  extract_package_name:
+  create_release_and_push:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,11 +18,6 @@ jobs:
 
     - name: Use Package Name
       run: echo "The package name is ${{ env.PACKAGE_NAME }}"
-      
-  create_release_and_push:
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
