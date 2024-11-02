@@ -13,11 +13,11 @@ jobs:
         echo "This workflow should not be triggered with workflow_dispatch on a branch other than main"
         exit 1
         
-    - name: Fail if action is run on other repository than darwin-eu-dev
-      if: github.event_name == 'workflow_dispatch' && env.GITHUB_REPOSITORY_OWNER != 'darwin-eu-dev'
-      run: |
-        echo "This workflow should not be triggered on other repositories than darwin-eu-dev"
-        exit 1
+   # - name: Fail if action is run on other repository than darwin-eu-dev
+   #   if: github.event_name == 'workflow_dispatch' && env.GITHUB_REPOSITORY_OWNER != 'darwin-eu-dev'
+   #   run: |
+   #     echo "This workflow should not be triggered on other repositories than darwin-eu-dev"
+   #     exit 1 
 
     - name: Checkout repository
       uses: actions/checkout@v3
