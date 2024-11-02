@@ -66,10 +66,11 @@ jobs:
     - name: Push to public mirror
       id: push
       env:
-        GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       shell: bash
       working-directory: 'Target'
       run: |
+        git config --global user.name PRijnbeek
         eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/${{ env.PACKAGE_NAME }}.git main'
         git push origin main
 
@@ -77,7 +78,7 @@ jobs:
       id: create_release_targetP
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         owner: darwin-eu
         repo: ${{ env.PACKAGE_NAME }}
