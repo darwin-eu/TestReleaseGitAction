@@ -81,8 +81,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
         owner: darwin-eu
-        repos: ${{ env.PACKAGE_NAME }}
-        token:  ${{ secrets.RELEASE_TOKEN }}
+        repo: ${{ env.PACKAGE_NAME }}
         tag_name: v${{ env.VERSION }}
         release_name: Release ${{ env.VERSION }}
         body: Release of version ${{ env.VERSION }}. For changelog see NEWS.md.
