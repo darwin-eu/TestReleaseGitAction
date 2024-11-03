@@ -78,7 +78,7 @@ jobs:
       id: create_release_target
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         owner: darwin-eu
         repo: ${{ env.PACKAGE_NAME }}
