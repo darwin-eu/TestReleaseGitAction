@@ -54,12 +54,11 @@ jobs:
 
     - name: Checkout target repo
       uses: actions/checkout@v3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         path: 'Target'
         ref: 'main'
         repository: 'darwin-eu/${{ env.PACKAGE_NAME }}'
+        token: ${{ secrets.PRIVATE_TOKEN }}
         persist-credentials: true
 
     - name: Push to public mirror
