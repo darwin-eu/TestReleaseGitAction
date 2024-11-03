@@ -71,8 +71,6 @@ jobs:
       working-directory: 'Target'
       run: |
         git config --global user.name PRijnbeek
-        git fetch --all
-        git reset --hard origin/main
         eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/${{ env.PACKAGE_NAME }}.git main'
         git push origin main
 
