@@ -60,7 +60,6 @@ jobs:
         path: 'Target'
         ref: 'main'
         repository: 'darwin-eu/${{ env.PACKAGE_NAME }}'
-        token: ${{ secrets.PRIVATE_TOKEN }}
         persist-credentials: true
 
     - name: Push to public mirror
