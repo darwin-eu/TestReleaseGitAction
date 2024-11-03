@@ -71,7 +71,9 @@ jobs:
       working-directory: 'Target'
       run: |
         git config --global user.name PRijnbeek
-        eval 'git pull --rebase https://$GITHUB_TOKEN@github.com/darwin-eu-dev/${{ env.PACKAGE_NAME }}.git main'
+        git fetch --all
+        git reset --hard origin/main
+        eval 'git pull https://$GITHUB_TOKEN@github.com/darwin-eu-dev/${{ env.PACKAGE_NAME }}.git main'
         git push origin main
 
     - name: Create Release in Target Repository
